@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="eS">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Galería imágenes</title>
+  
+</head>
+<body>
+  
+<div class="gallery">
+  <img src="https://picsum.photos/200/300?grayscale">
+  <img src="https://picsum.photos/200/301?grayscale">
+  <img src="https://picsum.photos/200/300?grayscale">
+  <img src="https://picsum.photos/200/300?grayscale">
+  <img src="https://picsum.photos/202/300?grayscale">
+  <img src="https://picsum.photos/204/300?grayscale">
+</div>
+</body>
+<style>
+
+	.gallery {
+	  --s: 30px; /* control the zig-zag size */
+	  
+	  display: grid;
+	  height: 350px;
+	  gap: 8px;
+	  grid-auto-flow: column;
+	  place-items: center;
+	}
+	.gallery > img {
+	  width: 0;
+	  min-width: calc(100% + var(--s));
+	  height: 0;
+	  min-height: 100%;
+	  object-fit: cover;
+	  --mask: 
+	    conic-gradient(from -135deg at right,#0000,#000 1deg 89deg,#0000 90deg) 
+	      100% calc(50% + var(--_p,0%))/51% calc(2*var(--s)) repeat-y,
+	    conic-gradient(from   45deg at left ,#0000,#000 1deg 89deg,#0000 90deg) 
+	        0% calc(50% + var(--_p,0%))/51% calc(2*var(--s)) repeat-y;
+	  -webkit-mask: var(--mask);
+	          mask: var(--mask);
+	  cursor: pointer;
+	  transition: .5s;
+	}
+	.gallery > img:nth-child(odd) {
+	  --_p: var(--s);
+	}
+	.gallery > img:hover {
+	  width: 15vw; 
+	}
+	.gallery > img:first-child {
+	  min-width: calc(100% + var(--s)/2);
+	  place-self: start;
+	  --mask: 
+	    conic-gradient(from -135deg at right,#0000,#000 1deg 89deg,#0000 90deg) 
+	      0 calc(50% + var(--_p,0%))/100% calc(2*var(--s));
+	}
+	.gallery > img:last-child {
+	  min-width: calc(100% + var(--s)/2);
+	  place-self: end;
+	  --mask: 
+	    conic-gradient(from   45deg at left ,#0000,#000 1deg 89deg,#0000 90deg) 
+	       0 calc(50% + var(--_p,0%)) /100% calc(2*var(--s));
+	}
+
+	body {
+	  margin: 0;
+	  min-height: 100vh;
+	  display: grid;
+	  align-content: center;
+	  background: rgb(238,174,202);
+	  background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(57,87,107,1) 5%); 	
+	}
+
+
+</style>
+</html>
+
